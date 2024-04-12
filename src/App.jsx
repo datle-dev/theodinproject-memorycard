@@ -25,13 +25,17 @@ function App() {
   } else {
     return (
       <>
-        <h1>Pokemon Memory Card</h1>
-        <p>Earn points by clicking on Pokemon, but don&apos;t click on any Pokemon more than once!</p>
-        <ScoreBoard points={points} best={best} />
-        <article>
-          <img src={pokemon.sprites.front_default} alt={pokemon.species.name} />
-          <h2>{pokemon.species.name}</h2>
-        </article>
+        <header>
+          <h1>Pokemon Memory Card</h1>
+          <p>Earn points by clicking on Pokemon, but don&apos;t click on any Pokemon more than once!</p>
+        </header>
+        <main>
+          <ScoreBoard points={points} best={best} />
+          <article>
+            <img src={pokemon.sprites.front_default} alt={pokemon.species.name} />
+            <h2>{pokemon.species.name}</h2>
+          </article>
+          </main>
       </>
     );
   }
