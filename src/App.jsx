@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import './styles/App.css';
 import GameBoard from './components/GameBoard.jsx';
 import ScoreBoard from './components/ScoreBoard';
-import { fetchAll, createRandIntArray } from './scripts/utility.js';
+import { fetchAll, createRandIntArray, randomizeArrayOrder } from './scripts/utility.js';
 
 function App() {
   const [pokemon, setPokemon] = useState({});
+  const [order, setOrder] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [points, setPoints] = useState(0);
   const [best, setBest] = useState(points);
@@ -22,6 +23,8 @@ function App() {
         pokemonObject[entry.species.name] = entry;
       });
       setPokemon(pokemonObject);
+      const pokemonOrder = randomizeArrayOrder(Object.keys(pokemonObject));
+      setOrder(pokemonOrder);
       setIsLoading(false);
     });
   }, []);
@@ -29,6 +32,8 @@ function App() {
   function handlePokemonSelect(e) {
     let pokemonName = e.target.getAttribute('data-key');
     console.log(pokemonName);
+    const pokemonOrder = randomizeArrayOrder(Object.keys(pokemon));
+    setOrder(pokemonOrder);
   }
 
   if (isLoading) {
@@ -45,7 +50,7 @@ function App() {
         </header>
         <main>
           <ScoreBoard points={points} best={best} />
-          <GameBoard pokemon={pokemon} onClick={handlePokemonSelect} />
+          <GameBoard pokemon={pokemon} order={order} onClick={handlePokemonSelect} />
         </main>
       </>
     );
