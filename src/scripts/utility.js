@@ -27,4 +27,8 @@ const createRandIntArray = (num) => {
   return outputArray;
 };
 
-export { fetchAll, createRandIntArray };
+const capitalizeFirst = (input) => {
+  return input.charAt(0).toUpperCase() + input.slice(1);
+}
+
+export { fetchAll, createRandIntArray, capitalizeFirst };
