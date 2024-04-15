@@ -26,6 +26,11 @@ function App() {
     });
   }, []);
 
+  function handlePokemonSelect(e) {
+    let pokemonName = e.target.getAttribute('data-key');
+    console.log(pokemonName);
+  }
+
   if (isLoading) {
     return <p>Loading...</p>;
   } else {
@@ -40,7 +45,7 @@ function App() {
         </header>
         <main>
           <ScoreBoard points={points} best={best} />
-          <GameBoard pokemon={pokemon} />
+          <GameBoard pokemon={pokemon} onClick={handlePokemonSelect} />
         </main>
       </>
     );
