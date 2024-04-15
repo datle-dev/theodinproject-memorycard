@@ -31,4 +31,14 @@ const capitalizeFirst = (input) => {
   return input.charAt(0).toUpperCase() + input.slice(1);
 }
 
-export { fetchAll, createRandIntArray, capitalizeFirst };
+const randomizeArrayOrder = (inputArr) => {
+  let outputArr = [];
+  while (inputArr.length > 0) {
+    let randIndex = getRandIntInclusive(0, inputArr.length - 1);
+    outputArr.push(inputArr[randIndex]);
+    inputArr.splice(randIndex, 1);
+  }
+  return outputArr;
+}
+
+export { fetchAll, createRandIntArray, capitalizeFirst, randomizeArrayOrder };
