@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './styles/App.css';
 import ScoreBoard from './components/ScoreBoard';
+import { fetchAll, createRandIntArray } from './scripts/utility.js';
 
 function App() {
   const [pokemon, setPokemon] = useState({});
