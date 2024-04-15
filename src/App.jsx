@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './styles/App.css';
+import GameBoard from './components/GameBoard.jsx';
 import ScoreBoard from './components/ScoreBoard';
 import { fetchAll, createRandIntArray } from './scripts/utility.js';
 
@@ -26,26 +27,20 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return (
-      <p>Loading...</p>
-    );
+    return <p>Loading...</p>;
   } else {
     return (
       <>
         <header>
           <h1>Pokemon Memory Card</h1>
-          <p>Earn points by clicking on Pokemon, but don&apos;t click on any Pokemon more than once!</p>
+          <p>
+            Earn points by clicking on Pokemon, but don&apos;t click on any
+            Pokemon more than once!
+          </p>
         </header>
         <main>
           <ScoreBoard points={points} best={best} />
-          {Object.keys(pokemon).map((key) => {
-            return (
-              <article key={key}>
-                <img src={pokemon[key].sprites.front_default} alt={key} />
-                <h2>{key}</h2>
-              </article>
-            );
-          })}
+          <GameBoard pokemon={pokemon} />
         </main>
       </>
     );
