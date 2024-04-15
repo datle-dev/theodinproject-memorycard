@@ -10,13 +10,19 @@ function App() {
   const [best, setBest] = useState(points);
 
   useEffect(() => {
-    async function fetchPokemon() {
-      let response = await fetch('https://pokeapi.co/api/v2/pokemon/ditto');
-      let data = await response.json();
-      setPokemon(data);
+    let pokemonObject = {};
+    let pokemonIndexArray = createRandIntArray(8);
+    let pokemonURLArray = pokemonIndexArray.map((index) => {
+      return `https://pokeapi.co/api/v2/pokemon/${String(index)}`;
+    });
+
+    fetchAll(pokemonURLArray).then((data) => {
+      data.forEach((entry) => {
+        pokemonObject[entry.species.name] = entry;
+      });
+      setPokemon(pokemonObject);
       setIsLoading(false);
-    }
-    fetchPokemon();
+    });
   }, []);
 
   if (isLoading) {
@@ -32,11 +38,15 @@ function App() {
         </header>
         <main>
           <ScoreBoard points={points} best={best} />
-          <article>
-            <img src={pokemon.sprites.front_default} alt={pokemon.species.name} />
-            <h2>{pokemon.species.name}</h2>
-          </article>
-          </main>
+          {Object.keys(pokemon).map((key) => {
+            return (
+              <article key={key}>
+                <img src={pokemon[key].sprites.front_default} alt={key} />
+                <h2>{key}</h2>
+              </article>
+            );
+          })}
+        </main>
       </>
     );
   }
