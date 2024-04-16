@@ -5,7 +5,7 @@ import ScoreBoard from './components/ScoreBoard';
 import { fetchAll, createRandIntArray, randomizeArrayOrder } from './scripts/utility.js';
 
 function App() {
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState([]);
   const [numPokemon, setNumPokemon] = useState(8);
   const [indices, setIndices] = useState(createRandIntArray(numPokemon));
   const [order, setOrder] = useState([])
