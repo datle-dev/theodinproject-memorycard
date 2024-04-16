@@ -7,6 +7,7 @@ import { fetchAll, createRandIntArray, randomizeArrayOrder } from './scripts/uti
 function App() {
   const [pokemon, setPokemon] = useState([]);
   const [numPokemon, setNumPokemon] = useState(8);
+  const [selected, setSelected] = useState([])
   const [indices, setIndices] = useState(createRandIntArray(numPokemon));
   const [order, setOrder] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +35,25 @@ function App() {
 
   function handlePokemonSelect(e) {
     let pokemonName = e.target.getAttribute('data-key');
-    console.log(pokemonName);
+    if (!selected.includes(pokemonName)) {
+      setSelected([...selected, pokemonName])
+      setPoints(points + 1);
+      if (points + 1 >= best) {
+        setBest(points + 1)
+      }
+    } else {
+      setPoints(0);
+      setSelected([]);
+    }
+    
     const pokemonOrder = randomizeArrayOrder(Object.keys(pokemon));
     setOrder(pokemonOrder);
   }
 
   function handleNewPokemon(e) {
     setIndices(createRandIntArray(numPokemon));
+    setPoints(0);
+    setSelected([]);
   }
 
   function handleIncreaseCount(e) {
